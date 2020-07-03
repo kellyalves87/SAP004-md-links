@@ -1,18 +1,23 @@
-// module.exports = () => {
-//   // ...
-// };
+const fs = require("fs");
 
-fs = require("fs");
+mdLinks = (file) => {
+  return new Promise((resolved, rejected) => {    
+    fs.readFile(file, "utf8", (err, data) => {
+      if (err) {
+        rejected(err.message);
+      } else {
+        const regexLinks = (/\[([^\]]*)\]\((http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?\)/gm);
+        const array = data.match(regexLinks);
+        const checkLink = array.map((el) => {
+          const fileText = el.split('](');
+          const text = fileText[0].replace("[", "");
+          const href = fileText[1].replace(")", "");
+          return { file, text, href }
+        });
+        resolved(checkLink);
+      }      
+    });
+  });
+}
 
-console.log(process.argv);
-
-const md = process.argv.slice(2);
-
-console.log(md);
-
-fs.readFile(md[0], "utf8", function (err, data) {
-  if (err) {
-    return console.log(err);
-  }
-  console.log(data);
-});
+mdLinks(process.argv.slice(2)[0]).then((success) => console.log(success)).catch((error) => console.log(error));
