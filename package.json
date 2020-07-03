@@ -1,4 +1,19 @@
 {
   "name": "md-links",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "description": "Library developed for the markdown project, from Laboratoria-Br",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kellyalves87/SAP004-md-links.git"
+  },
+  "author": "Kelly Alves",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kellyalves87/SAP004-md-links/issues"
+  },
+  "homepage": "https://github.com/kellyalves87/SAP004-md-links#readme"
 }
