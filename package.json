@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/kellyalves87/SAP004-md-links/issues"
   },
-  "homepage": "https://github.com/kellyalves87/SAP004-md-links#readme"
+  "homepage": "https://github.com/kellyalves87/SAP004-md-links#readme",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
 }
