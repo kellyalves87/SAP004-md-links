@@ -1,6 +1,7 @@
 const stats = (array) => {
-    const set = new Set(array);
-    return {"Unique": set.size,  "All": array.length};
-}
+  const setLinks = array.map((item) => item.href);
+  const set = new Set(setLinks);
+  return "Unique: " + set.size + " All: " + array.length;
+};
 
 exports.stats = stats;

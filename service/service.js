@@ -1,36 +1,71 @@
 const file = require("../file/file.js");
-const http = require("../http/http.js");
+const path = require("path");
+const { getHttp } = require("../http/http.js");
 const stats = require("../stats/stats.js");
 
 const main = (fileName, params) => {
+  const fileArr = file.getDataFile(fileName);
 
-    let returnFiles;
-    file.getDataFile(fileName).then(files => {
-        returnFiles = files;
-    })
-    .catch(error => console.log(error));
-    
-    let returnHttp = [];
-    if(params.validate && !params.stats){
-        returnFiles.map(file => {
-            http.getHttp(file.href).then(response => {
-                returnHttp.push({file:file.file, link:file.href, status:response.status, message:status.statusText, name:file.text})
-            })
-            .catch(error => console.log(error));
-        })
-        return returnHttp;
-    }
+  if (params.includes("--validate") && params.includes("--stats")) {
+    validateAndStats(fileArr);
+    return;
+  }
 
-    let returnStats = {};
-    if(params.stats && !params.validate){
-        returnStats = stats.stats(returnFiles);
-        return returnStats;
-    }
+  if (params.includes("--validate")) {
+    validate(fileArr);
+    return;
+  }
 
-    //todo 
+  if (params.includes("--stats")) {
+    console.log(stats.stats(fileArr));
+    return;
+  }
 
+  fileArr.forEach((file) => {
+    console.log(path.resolve(file.file) + " " + file.href + " " + file.text);
+  });
+};
 
-    return returnFiles
-}
+const validateAndStats = (fileArr) => {
+  let objStatus = stats.stats(fileArr);
+  let broken = 0;
+
+  const request = Promise.all(fileArr.map((file) => getHttp(file.href)));
+
+  request.then((links) => {
+    links.forEach((link) => {
+      if (link.status === "Fail") {
+        broken = broken + 1;
+      }
+    });
+
+    objStatus += " Broken: " + broken;
+
+    console.log(objStatus);
+  });
+};
+
+const validate = (fileArr) => {
+  fileArr.map((file) => {
+    getHttp(file.href)
+      .then((response) => {
+        console.log(
+          path.resolve(file.file),
+          file.href,
+          response.statusText,
+          response.status,
+          file.text
+        );
+      })
+      .catch((error) => {
+        console.log(
+          path.resolve(file.file),
+          file.href,
+          error.statusText,
+          error.status
+        );
+      });
+  });
+};
 
 exports.main = main;

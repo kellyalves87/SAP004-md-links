@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Library developed for the markdown project, from Laboratoria-Br",
   "main": "index.js",
+  "bin":{
+    "md-links": "./index.js"
+  },
   "scripts": {
     "eslint": "eslint --ext .js test/",
     "test": "jest --coverage"
