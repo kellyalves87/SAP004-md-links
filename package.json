@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Library developed for the markdown project, from Laboratoria-Br",
   "main": "index.js",
-  "bin":{
+  "bin": {
     "md-links": "./index.js"
   },
   "scripts": {
