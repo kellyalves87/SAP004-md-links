@@ -17,40 +17,36 @@ O executável da aplicação deve ser da seguinte maneira, através do terminal:
 `md-links <pasta ou arquivo desejado>`
 
 Com este comando, já é possível listar seus arquivos Markdown como no exemplo abaixo:
-`
+
 ~/repo/SAP004-md-links$ md-links LINKS.md
 /home/kelly/repo/SAP004-md-links/LINKS.md http://www.adultswim.com/streams **_Adult Swin_**
 /home/kelly/repo/SAP004-md-links/LINKS.md https://www.netflix.com/br/n/3SPHBNZT-1 **_Netflix_**
 
-`
+
 É possível verificar também a validação do módulo passando a opção `--validate`. Esta opção faz uma requisição HTTP para verificar se o link funciona ou não. Exemplo:
 
-`
+
 ~/repo/SAP004-md-links$ md-links LINKS.md --validate
 /home/kelly/repo/SAP004-md-links/LINKS.md https://www.netflix.com/br/n/3SPHBNZT-1 OK 200 **_Netflix_**
 /home/kelly/repo/SAP004-md-links/LINKS.md http://www.adultswim.com/streams OK 200 **_Adult Swin_**
 
-`
+
 Temos também como verificar a estatística do módulo usando a opção `--stats`. Esta opção retorna um texto com estatísticas básicas sobre os links como no exemplo abaixo:
 
-`
 ~/repo/SAP004-md-links$ md-links LINKS.md --stats
 Unique: 14 All: 16
 
-`
-E por último, se juntarmos as duas opções `--validate` `--stats`, podemos obter estatísticas que necessitem dos resultados da validação. Ex:
+E por último, se juntarmos as duas opções `--validate` e `--stats`, podemos obter estatísticas que necessitem dos resultados da validação. Ex:
 
-`
 ~/repo/SAP004-md-links$ md-links LINKS.md --validate --stats
 Unique: 14 All: 16 Broken: 2
 
-`
 # Tecnologias e Libs utilizadas neste projeto
 
-Node.js
-Chalk
-Axios
-Vanilla Javascript
+- Node.js
+- Chalk
+- Axios
+- Vanilla Javascript
 
 # Autor
 
