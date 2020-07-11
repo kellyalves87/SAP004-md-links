@@ -40,11 +40,11 @@ Temos como verificar também a estatística do módulo usando a opção `--stats
 
 **~/repo/SAP004-md-links$ md-links LINKS.md --stats**
 
-- `#F2E205`**Unique**: 4 **All**r último, se juntarmos as duas opções `--validate` e `--stats`, podemos obter estatísticas que necessitem dos resultados da validação. Exemplo:
+- **Unique**: 4 **All**r último, se juntarmos as duas opções `--validate` e `--stats`, podemos obter estatísticas que necessitem dos resultados da validação. Exemplo:
 
 **~/repo/SAP004-md-links$ md-links LINKS.md --validate --stats**
 
-- `#F2E205`**Unique**: 4 **All**027`**Broken**: 2
+- **Unique**: 4 **All** **Broken**: 2
 
 # Tecnologias e Libs utilizadas neste projeto
 
