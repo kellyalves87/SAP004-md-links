@@ -2,6 +2,7 @@ const file = require("../file/file.js");
 const path = require("path");
 const { getHttp } = require("../http/http.js");
 const stats = require("../stats/stats.js");
+const chalk = require("chalk");
 
 const main = (fileName, params) => {
   const fileArr = file.getDataFile(fileName);
@@ -17,12 +18,12 @@ const main = (fileName, params) => {
   }
 
   if (params.includes("--stats")) {
-    console.log(stats.stats(fileArr));
+    console.log(chalk.green(stats.stats(fileArr)));
     return;
   }
 
   fileArr.forEach((file) => {
-    console.log(path.resolve(file.file) + " " + file.href + " " + file.text);
+    console.log(chalk.green(path.resolve(file.file) + " " + file.href + " " + file.text));
   });
 };
 
@@ -41,7 +42,7 @@ const validateAndStats = (fileArr) => {
 
     objStatus += " Broken: " + broken;
 
-    console.log(objStatus);
+    console.log(chalk.green(objStatus));
   });
 };
 
@@ -49,23 +50,36 @@ const validate = (fileArr) => {
   fileArr.map((file) => {
     getHttp(file.href)
       .then((response) => {
-        console.log(
-          path.resolve(file.file),
-          file.href,
-          response.statusText,
-          response.status,
-          file.text
-        );
+        console.log(logger(file, response));
       })
       .catch((error) => {
-        console.log(
+        console.log(chalk.red(
           path.resolve(file.file),
           file.href,
           error.statusText,
           error.status
-        );
+        ));
       });
   });
 };
+
+const logger = (file, response) => {
+  if(response.statusText !== "OK"){
+    return chalk.red(
+      path.resolve(file.file),
+      file.href,
+      response.statusText,
+      response.status,
+      file.text
+    )
+  }
+  return chalk.green(
+    path.resolve(file.file),
+    file.href,
+    response.statusText,
+    response.status,
+    file.text
+  )
+}
 
 exports.main = main;

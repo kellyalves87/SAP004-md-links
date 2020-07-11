@@ -12,7 +12,7 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/index.js",
-            "args": ["LINKS.md", "--validate", "--stats"]
+            "args": ["LINKS.md", "--validate"]
         }
     ]
 }
