@@ -50,7 +50,13 @@ const validate = (fileArr) => {
   fileArr.map((file) => {
     getHttp(file.href)
       .then((response) => {
-        console.log(logger(file, response));
+        console.log(chalk.green(
+          path.resolve(file.file),
+          file.href,
+          response.statusText,
+          response.status,
+          file.text
+        ));
       })
       .catch((error) => {
         console.log(chalk.red(
@@ -62,24 +68,5 @@ const validate = (fileArr) => {
       });
   });
 };
-
-const logger = (file, response) => {
-  if(response.statusText !== "OK"){
-    return chalk.red(
-      path.resolve(file.file),
-      file.href,
-      response.statusText,
-      response.status,
-      file.text
-    )
-  }
-  return chalk.green(
-    path.resolve(file.file),
-    file.href,
-    response.statusText,
-    response.status,
-    file.text
-  )
-}
 
 exports.main = main;
