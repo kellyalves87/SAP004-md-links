@@ -10,7 +10,7 @@ A proposta do projeto é construir uma ferramenta de linha de comando (CLI) e cr
 
 `npm install -g https://github.com/kellyalves87/SAP004-md-links`
 
-# CLI (Command Line Interface - Interface de Linha de Comando)
+# CLI (Interface de Linha de Comando)
 
 O executável da aplicação deve ser da seguinte maneira, através do terminal:
 
@@ -40,13 +40,11 @@ Temos como verificar também a estatística do módulo usando a opção `--stats
 
 **~/repo/SAP004-md-links$ md-links LINKS.md --stats**
 
-- **Unique**: 4 **All**: 4
-
-E por último, se juntarmos as duas opções `--validate` e `--stats`, podemos obter estatísticas que necessitem dos resultados da validação. Exemplo:
+- `#F2E205`**Unique**: 4 **All**r último, se juntarmos as duas opções `--validate` e `--stats`, podemos obter estatísticas que necessitem dos resultados da validação. Exemplo:
 
 **~/repo/SAP004-md-links$ md-links LINKS.md --validate --stats**
 
-- **Unique**: 4 **All**: 4 **Broken**: 2
+- `#F2E205`**Unique**: 4 **All**027`**Broken**: 2
 
 # Tecnologias e Libs utilizadas neste projeto
 
