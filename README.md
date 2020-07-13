@@ -8,6 +8,10 @@ A proposta do projeto é construir uma ferramenta de linha de comando (CLI) e cr
 
 # Instalação
 
+Certifique-se de que tenha o Node.js instalado em sua máquina para que o projeto possa rodar sem maiores problemas.
+
+Após isto, insira o seguinte comando em seu terminal:
+
 `npm install -g https://github.com/kellyalves87/SAP004-md-links`
 
 # CLI (Interface de Linha de Comando)
@@ -24,6 +28,7 @@ Com este comando, já é possível listar seus arquivos Markdown como no exemplo
 
 - /home/kelly/repo/SAP004-md-links/LINKS.md https://www.netflix.com/br/n/3SPHBNZT-1 **_Netflix_**
 
+# Opção --**_validate_**
 
 É possível verificar também a validação do módulo passando a opção `--validate`. Esta opção faz uma requisição HTTP para verificar se o link funciona ou não. Exemplo:
 
@@ -36,11 +41,15 @@ Com este comando, já é possível listar seus arquivos Markdown como no exemplo
 - /home/kelly/repo/SAP004-md-links/LINKS.md https://rickkkkkandmortyapi.com/api/episode/1 **ENOTFOUND** **Fail** **_Episódio-13_**
 
 
+# Opção --**_stats_**
+
 Temos como verificar também a estatística do módulo usando a opção `--stats`. Esta opção retorna um texto com estatísticas básicas sobre os links como no exemplo abaixo:
 
 **~/repo/SAP004-md-links$ md-links LINKS.md --stats**
 
 - **Unique**: 4 **All**: 4
+
+# Opção --**_validate_** --**_stats_**
 
 E por último, se juntarmos as duas opções `--validate` e `--stats`, podemos obter estatísticas que necessitem dos resultados da validação. Exemplo:
 
@@ -48,10 +57,13 @@ E por último, se juntarmos as duas opções `--validate` e `--stats`, podemos o
 
 - **Unique**: 4 **All**: 4 **Broken**: 2
 
+# Futuras implementações
+
+- Leitura de multiplos arquivos .md existentes no diretório.
+
 # Tecnologias e Libs utilizadas neste projeto
 
 - **Node.js**
-- **Chalk**
 - **Axios**
 - **Vanilla Javascript**
 

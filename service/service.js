@@ -2,7 +2,6 @@ const file = require("../file/file.js");
 const path = require("path");
 const { getHttp } = require("../http/http.js");
 const stats = require("../stats/stats.js");
-const chalk = require("chalk");
 
 const main = (fileName, params) => {
   const fileArr = file.getDataFile(fileName);
@@ -18,12 +17,12 @@ const main = (fileName, params) => {
   }
 
   if (params.includes("--stats")) {
-    console.log(chalk.green(stats.stats(fileArr)));
+    console.log((stats.stats(fileArr)));
     return;
   }
 
   fileArr.forEach((file) => {
-    console.log(chalk.green(path.resolve(file.file) + " " + file.href + " " + file.text));
+    console.log((path.resolve(file.file) + " " + file.href + " " + file.text));
   });
 };
 
@@ -42,7 +41,7 @@ const validateAndStats = (fileArr) => {
 
     objStatus += " Broken: " + broken;
 
-    console.log(chalk.green(objStatus));
+    console.log((objStatus));
   });
 };
 
@@ -50,21 +49,21 @@ const validate = (fileArr) => {
   fileArr.map((file) => {
     getHttp(file.href)
       .then((response) => {
-        console.log(chalk.green(
+        console.log(
           path.resolve(file.file),
           file.href,
           response.statusText,
           response.status,
           file.text
-        ));
+        );
       })
       .catch((error) => {
-        console.log(chalk.red(
+        console.log(
           path.resolve(file.file),
           file.href,
           error.statusText,
           error.status
-        ));
+        );
       });
   });
 };

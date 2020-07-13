@@ -1,13 +1,9 @@
 const service = require("../service/service.js");
 const file = require("../file/file.js");
-const path = require("path");
-const { getHttp } = require("../http/http.js");
 const stats = require("../stats/stats.js");
-const chalk = require("chalk");
 
 jest.mock("fs");
 jest.mock("../file/file.js");
-jest.mock("../http/http.js");
 jest.mock("../stats/stats.js");
 
 global.console = {
@@ -47,20 +43,19 @@ describe("service function", () => {
         href: "http://www.mozilla.com",
         text: "Bringin the files",
       },
+      {
+        file: "Test.md",
+        href: "http://hahaertrtrtr.com",
+        text: "Fake URL"
+      }
     ];
 
-    const returnStats = "Unique: 2 All: 2";
-    const response = {
-      status: "200",
-      statusText: "Ok",
-      href: "http://www.google.com",
-    };
+    const returnStats = "Unique: 3 All: 3";
 
     file.getDataFile.mockReturnValue(fileArray);
-    getHttp.mockImplementationOnce(() => Promise.resolve(response));
     stats.stats.mockReturnValue(returnStats);
 
-    const returnLog = "Unique: 2 All: 2 Broken: 0";
+    const returnLog = "Unique: 2 All: 2 Broken: 1";
 
     service.main("Test.md", ["--validate", "--stats"]);
 
@@ -68,51 +63,44 @@ describe("service function", () => {
     expect(console.log).toHaveBeenCalled();
   });
 
-  // it("should be executed when pass validate", () => {
-  //   const fileArray = [
-  //     {
-  //       file: "Test.md",
-  //       href: "http://www.google.com",
-  //       text: "Testing functionalities",
-  //     },
-  //     {
-  //       file: "Test.md",
-  //       href: "http://www.mozilla.com",
-  //       text: "Bringin the files",
-  //     },
-  //   ];
+  it("should be executed when pass validate", () => {
+    const fileArray = [
+      {
+        file: "Test.md",
+        href: "http://www.google.com",
+        text: "Testing functionalities",
+      },
+      {
+        file: "Test.md",
+        href: "http://www.mozilla.com",
+        text: "Bringin the files",
+      },
+    ];
 
-  //   const response = {
-  //     status: "200",
-  //     statusText: "Ok",
-  //     href: "http://www.google.com",
-  //   };
+    file.getDataFile.mockReturnValue(fileArray);
 
-  //   file.getDataFile.mockReturnValue(fileArray);
-  //   getHttp.mockImplementationOnce(() => Promise.resolve(response));
+    const returnLog = [
+      {
+        file: "/home/kelly/repo/SAP004-md-links/Test.md",
+        status: "200",
+        statusText: "Ok",
+        href: "http://www.google.com",
+        text: "Test.md"
+      },
+      {
+        file: "/home/kelly/repo/SAP004-md-links/Test.md",
+        status: "200",
+        statusText: "Ok",
+        href: "http://www.mozzila.com",
+        text: "Test.md"
+      },
+    ];
 
-  //   const returnLog = [
-  //     {
-  //       file: "/home/kelly/repo/SAP004-md-links/Test.md",
-  //       status: "200",
-  //       statusText: "Ok",
-  //       href: "http://www.google.com",
-  //       text: "Test.md"
-  //     },
-  //     {
-  //       file: "/home/kelly/repo/SAP004-md-links/Test.md",
-  //       status: "200",
-  //       statusText: "Ok",
-  //       href: "http://www.mozzila.com",
-  //       text: "Test.md"
-  //     },
-  //   ];
+    service.main("Test.md", ["--validate"]);
 
-  //   service.main("Test.md", ["--validate"]);
-
-  //   console.log(returnLog);
-  //   expect(console.log).toHaveBeenCalled();
-  // });
+    console.log(returnLog);
+    expect(console.log).toHaveBeenCalled();
+  });
 
   it("should return stats", () => {
     const fileArray = [
