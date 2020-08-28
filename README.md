@@ -67,6 +67,6 @@ E por último, se juntarmos as duas opções `--validate` e `--stats`, podemos o
 - **Axios**
 - **Vanilla Javascript**
 
-# Autor
+# Autora
 
 [**Kelly Alves**](https://github.com/kellyalves87)
